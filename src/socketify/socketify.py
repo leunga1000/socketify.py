@@ -1681,10 +1681,10 @@ class AppResponse:
             )
         return self
 
-    def redirect(self, location, status_code=302):
+    def redirect(self, location, status_code=302, end_connection=True):
         self.write_status(status_code)
         self.write_header("Location", location)
-        self.end_without_body(False)
+        self.end_without_body(end_connection)  # warning changing default to True, otherwise redirect hangs for 8-9 seconds
         return self
 
     def write_offset(self, offset):
